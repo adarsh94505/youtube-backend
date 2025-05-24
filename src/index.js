@@ -4,15 +4,18 @@ import connectDB from "./db/index.js";
 
 dotenv.config({ path: "./.env" });
 
-connectDB();
-
-
-
-
-
-
-
-
+connectDB()
+.then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`App is listening on port ${process.env.PORT}`);
+    });
+    console.log("MongoDB connected");
+}
+).catch((error) => {
+    console.log("Error connecting to MongoDB !!! : ", error);
+    throw error;
+}
+);
 
 
 /*
